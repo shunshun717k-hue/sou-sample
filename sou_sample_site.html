@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>カフェとお酒の店 創 | 守口市 古民家カフェ</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:#f5f0e8;color:#1a1208;font-family:'Noto Serif JP',serif;font-weight:300;padding-bottom:80px}
+
+.reserve-bar{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1a1208;display:flex;gap:2px;padding:10px 12px;box-shadow:0 -4px 20px rgba(0,0,0,0.3)}
+.reserve-bar a{flex:1;padding:13px 4px;text-align:center;font-size:12px;font-weight:700;text-decoration:none;border-radius:4px;display:block;font-family:'Noto Sans JP',sans-serif}
+.btn-tel{background:#5a3a20;color:#f5f0e8}
+.btn-line{background:#06c755;color:white}
+.btn-web{background:#8b6020;color:#f5f0e8}
+
+nav{position:sticky;top:0;z-index:100;background:#1a1208;border-bottom:1px solid rgba(139,96,32,.3);padding:14px 20px;display:flex;justify-content:space-between;align-items:center}
+.nav-logo{font-family:'Noto Serif JP',serif;font-size:17px;font-weight:700;color:#d4a860;text-decoration:none;letter-spacing:3px}
+.nav-links{display:flex;gap:20px;list-style:none}
+.nav-links a{font-size:11px;color:rgba(212,168,96,.4);text-decoration:none;font-family:'Noto Sans JP',sans-serif}
+
+/* HERO - 和・古民家・温かみ */
+.hero{background:#2a1e10;padding:56px 24px;text-align:center;position:relative;overflow:hidden}
+.hero::before{content:'創';position:absolute;right:-20px;bottom:-20px;font-size:280px;font-weight:700;color:rgba(212,168,96,.04);line-height:1;pointer-events:none}
+.hero-label{font-size:10px;letter-spacing:4px;color:#8b6020;display:block;margin-bottom:16px;font-family:'Noto Sans JP',sans-serif}
+.hero h1{font-family:'Noto Serif JP',serif;font-size:clamp(36px,8vw,64px);font-weight:700;color:#d4a860;letter-spacing:8px;margin-bottom:8px;line-height:1}
+.hero-sub{font-size:11px;color:rgba(212,168,96,.4);letter-spacing:3px;margin-bottom:24px;display:block;font-family:'Noto Sans JP',sans-serif}
+.hero-catch{font-family:'Noto Serif JP',serif;font-size:14px;color:rgba(245,240,232,.6);line-height:2.2;margin-bottom:32px;letter-spacing:1px}
+.hero-tags{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-bottom:32px}
+.hero-tag{background:rgba(139,96,32,.2);border:1px solid rgba(139,96,32,.4);color:#d4a860;font-size:11px;padding:4px 14px;font-family:'Noto Sans JP',sans-serif}
+.hero-cta{display:flex;flex-direction:column;gap:12px;max-width:300px;margin:0 auto}
+.hero-cta a{display:block;padding:17px;text-align:center;font-size:14px;font-weight:700;text-decoration:none;border-radius:4px;font-family:'Noto Sans JP',sans-serif}
+.cta-primary{background:#8b6020;color:#f5f0e8}
+.cta-secondary{border:1px solid rgba(212,168,96,.3);color:rgba(212,168,96,.6)}
+
+.section{padding:48px 24px;max-width:640px;margin:0 auto}
+.sec-label{font-size:10px;letter-spacing:4px;color:#8b6020;display:block;margin-bottom:8px;font-family:'Noto Sans JP',sans-serif}
+.sec-heading{font-family:'Noto Serif JP',serif;font-size:22px;font-weight:700;color:#1a1208;margin-bottom:28px}
+
+/* 特徴 */
+.feature-list{display:flex;flex-direction:column;gap:12px}
+.feature-item{background:white;padding:20px;border-left:3px solid #8b6020}
+.feature-item h3{font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700;color:#5a3a20;margin-bottom:8px}
+.feature-item p{font-size:13px;color:#6a5040;line-height:2;font-family:'Noto Sans JP',sans-serif}
+
+/* MENU */
+.menu-bg{background:#1a1208;padding:48px 24px}
+.menu-inner{max-width:640px;margin:0 auto}
+.menu-bg .sec-label{color:#d4a860}
+.menu-bg .sec-heading{color:#f5f0e8}
+.menu-tabs{display:flex;gap:2px;margin-bottom:20px;overflow-x:auto}
+.menu-tab{flex-shrink:0;padding:10px 20px;font-size:12px;font-weight:700;background:rgba(255,255,255,.05);color:rgba(212,168,96,.35);border:none;cursor:pointer;letter-spacing:1px;transition:all .3s;font-family:'Noto Serif JP',serif}
+.menu-tab.active{background:#8b6020;color:#f5f0e8}
+.menu-content{display:none}
+.menu-content.active{display:block}
+.menu-list{display:flex;flex-direction:column;gap:2px}
+.menu-item{background:rgba(255,255,255,.04);padding:18px 16px;display:flex;justify-content:space-between;align-items:center;gap:16px;border-bottom:1px solid rgba(139,96,32,.1)}
+.menu-item:last-child{border-bottom:none}
+.menu-name{font-family:'Noto Serif JP',serif;font-size:14px;color:#f5f0e8;display:block;margin-bottom:4px}
+.menu-desc{font-size:12px;color:rgba(245,240,232,.35);line-height:1.7;font-family:'Noto Sans JP',sans-serif}
+.menu-price{font-size:18px;color:#d4a860;white-space:nowrap;flex-shrink:0}
+
+/* 口コミ */
+.voice-list{display:flex;flex-direction:column;gap:12px}
+.voice-item{background:white;padding:20px;border-left:3px solid #d4a860;position:relative}
+.voice-text{font-size:13px;color:#3a2a18;line-height:2.2;margin-bottom:12px;font-style:italic}
+.voice-meta{font-size:11px;color:#8b6020;font-family:'Noto Sans JP',sans-serif;letter-spacing:1px}
+
+/* 営業時間 */
+.hours-list{display:flex;flex-direction:column;gap:2px}
+.hours-item{background:white;padding:14px 16px;display:flex;justify-content:space-between;align-items:center}
+.hours-day{font-size:13px;font-weight:700;min-width:80px}
+.hours-time{font-size:13px;color:#5a4030;font-family:'Noto Sans JP',sans-serif}
+.badge{font-size:11px;padding:3px 10px;border-radius:20px;font-weight:700;font-family:'Noto Sans JP',sans-serif}
+.badge-open{background:#f0ead8;color:#8b6020}
+.badge-closed{background:#f5f5f5;color:#999}
+.hours-note{font-size:12px;color:#999;margin-top:12px;line-height:1.8;font-family:'Noto Sans JP',sans-serif}
+
+/* RESERVE */
+.reserve-bg{background:#5a3a20;padding:48px 24px}
+.reserve-inner{max-width:640px;margin:0 auto}
+.reserve-bg .sec-label{color:rgba(245,240,232,.4)}
+.reserve-bg .sec-heading{color:#f5f0e8}
+.reserve-note{font-size:13px;color:rgba(245,240,232,.7);line-height:2;margin-bottom:20px;font-family:'Noto Sans JP',sans-serif}
+.reserve-list{display:flex;flex-direction:column;gap:10px}
+.reserve-item{background:rgba(255,255,255,.1);padding:18px 20px;display:flex;align-items:center;gap:16px;text-decoration:none;color:#f5f0e8}
+.r-icon{font-size:11px;letter-spacing:1px;background:rgba(255,255,255,.15);padding:6px 10px;flex-shrink:0;font-weight:700;font-family:'Noto Sans JP',sans-serif}
+.r-label{font-size:11px;color:rgba(245,240,232,.5);display:block;margin-bottom:4px;font-family:'Noto Sans JP',sans-serif}
+.r-val{font-size:15px;font-weight:700}
+.r-arrow{margin-left:auto;font-size:20px;opacity:.5}
+
+.access-list{display:flex;flex-direction:column}
+.access-row{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #e8dcc8}
+.access-row:last-child{border-bottom:none}
+.access-key{font-size:11px;letter-spacing:2px;color:#8b6020;width:72px;flex-shrink:0;padding-top:2px;font-family:'Noto Sans JP',sans-serif}
+.access-val{font-size:14px;color:#3a2a18;line-height:1.8;font-family:'Noto Sans JP',sans-serif}
+.map-area{background:#e8dcc8;height:180px;margin-top:20px;display:flex;align-items:center;justify-content:center;font-size:13px;color:#999;font-family:'Noto Sans JP',sans-serif}
+
+footer{background:#1a1208;padding:28px 20px;text-align:center;border-top:1px solid rgba(139,96,32,.2)}
+.footer-logo{font-family:'Noto Serif JP',serif;font-size:18px;color:rgba(212,168,96,.3);letter-spacing:4px;display:block;margin-bottom:6px}
+.footer-copy{font-size:11px;color:rgba(245,240,232,.15);font-family:'Noto Sans JP',sans-serif}
+</style>
+</head>
+<body>
+
+<div class="reserve-bar">
+  <a href="tel:xxx-xxxx-xxxx" class="btn-tel">電話で予約</a>
+  <a href="#reserve" class="btn-line">LINEで予約</a>
+  <a href="#reserve" class="btn-web">席を予約</a>
+</div>
+
+<nav>
+  <a href="#top" class="nav-logo">創</a>
+  <ul class="nav-links">
+    <li><a href="#menu">メニュー</a></li>
+    <li><a href="#hours">営業時間</a></li>
+    <li><a href="#reserve">予約</a></li>
+    <li><a href="#access">アクセス</a></li>
+  </ul>
+</nav>
+
+<section id="top" class="hero">
+  <span class="hero-label">守口市 / 古民家カフェ・お酒</span>
+  <h1>創</h1>
+  <span class="hero-sub">カフェとお酒の店 創（そう）</span>
+  <p class="hero-catch">備前焼の器で、料理とお酒を。<br>創業7年、守口の古民家で。</p>
+  <div class="hero-tags">
+    <span class="hero-tag">古民家・和の空間</span>
+    <span class="hero-tag">備前焼の器</span>
+    <span class="hero-tag">創業7年</span>
+    <span class="hero-tag">守口市駅 徒歩5分</span>
+  </div>
+  <div class="hero-cta">
+    <a href="#reserve" class="cta-primary">今すぐ席を予約する</a>
+    <a href="#menu" class="cta-secondary">メニューを見る</a>
+  </div>
+</section>
+
+<div class="section">
+  <span class="sec-label">About</span>
+  <div class="sec-heading">備前焼の器で、<br>料理もお酒も美しく。</div>
+  <div class="feature-list">
+    <div class="feature-item">
+      <h3>備前焼の器でいただく料理とお酒</h3>
+      <p>日本酒は好きな備前焼の器を選んでお楽しみいただけます。全国の作家さんが焼いたおちょこから、お気に入りの一客をどうぞ。</p>
+    </div>
+    <div class="feature-item">
+      <h3>古民家の温かみある空間</h3>
+      <p>外観も店内も古民家のレトロな雰囲気。創業7年、地元に愛され続けるアットホームなお店です。</p>
+    </div>
+    <div class="feature-item">
+      <h3>ランチ・カフェ・居酒屋と使い分けられる</h3>
+      <p>昼はカフェとして、夜は居酒屋として。備前ブレンドのコーヒーやレアチーズケーキもご好評いただいています。</p>
+    </div>
+  </div>
+</div>
+
+<div class="menu-bg" id="menu">
+  <div class="menu-inner">
+    <span class="sec-label">Menu</span>
+    <div class="sec-heading">メニュー</div>
+    <div class="menu-tabs">
+      <button class="menu-tab active" onclick="showTab(this,'food')">料理</button>
+      <button class="menu-tab" onclick="showTab(this,'drink')">お酒</button>
+      <button class="menu-tab" onclick="showTab(this,'cafe')">カフェ</button>
+    </div>
+    <div class="menu-content active" id="tab-food">
+      <div class="menu-list">
+        <div class="menu-item"><div><span class="menu-name">手作りハンバーグ</span><span class="menu-desc">ふわふわ柔らか。絶品ソースが人気の一品。備前焼の器で提供。</span></div><div class="menu-price">要問合せ</div></div>
+        <div class="menu-item"><div><span class="menu-name">お造り</span><span class="menu-desc">旬の魚を使ったお造り。備前焼の器で美しく。</span></div><div class="menu-price">要問合せ</div></div>
+        <div class="menu-item"><div><span class="menu-name">串カツ</span><span class="menu-desc">サクサクの揚げたて串カツ。お酒との相性抜群。</span></div><div class="menu-price">要問合せ</div></div>
+        <div class="menu-item"><div><span class="menu-name">ポテトサラダ・前菜3種盛り</span><span class="menu-desc">お酒のおつまみに最適な定番おつまみ。</span></div><div class="menu-price">要問合せ</div></div>
+      </div>
+    </div>
+    <div class="menu-content" id="tab-drink">
+      <div class="menu-list">
+        <div class="menu-item"><div><span class="menu-name">日本酒（器を選んでいただけます）</span><span class="menu-desc">全国の作家さんが焼いた備前焼のおちょこからお選びください。</span></div><div class="menu-price">要問合せ</div></div>
+        <div class="menu-item"><div><span class="menu-name">ビール</span><span class="menu-desc">生ビール・瓶ビール各種</span></div><div class="menu-price">要問合せ</div></div>
+        <div class="menu-item"><div><span class="menu-name">焼酎・サワー各種</span><span class="menu-desc">豊富なお酒のラインナップ</span></div><div class="menu-price">要問合せ</div></div>
+      </div>
+    </div>
+    <div class="menu-content" id="tab-cafe">
+      <div class="menu-list">
+        <div class="menu-item"><div><span class="menu-name">備前ブレンドコーヒー</span><span class="menu-desc">備前焼を通してまろやかな味わいに変わるこだわりのコーヒー。</span></div><div class="menu-price">要問合せ</div></div>
+        <div class="menu-item"><div><span class="menu-name">北海道産レアチーズケーキ</span><span class="menu-desc">北海道産生クリームチーズを使用した自慢のレアチーズケーキ。</span></div><div class="menu-price">要問合せ</div></div>
+      </div>
+    </div>
+    <p style="font-size:12px;color:rgba(245,240,232,.2);margin-top:14px">※詳細なメニュー・価格はお問い合わせください。</p>
+  </div>
+</div>
+
+<div class="section">
+  <span class="sec-label">Voice</span>
+  <div class="sec-heading">お客様の声</div>
+  <div class="voice-list">
+    <div class="voice-item">
+      <p class="voice-text">「ハンバーグが絶品でした。柔らかくふわふわで、ソースが本当に美味しかったです。備前焼のお皿がおしゃれでさらに美味しさを倍増させてくれました。」</p>
+      <div class="voice-meta">口コミ / 守口市内 在住</div>
+    </div>
+    <div class="voice-item">
+      <p class="voice-text">「日本酒を頼むと好きな器を選べるのが楽しい。どれにしようか悩む時間も含めて楽しいお店です。古民家の雰囲気も最高でした。」</p>
+      <div class="voice-meta">口コミ / リピーター</div>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="hours">
+  <span class="sec-label">Hours</span>
+  <div class="sec-heading">営業時間</div>
+  <div class="hours-list">
+    <div class="hours-item"><span class="hours-day">火〜日</span><span class="hours-time">昼の部・夜の部（詳細はInstagramにて）</span><span class="badge badge-open">営業</span></div>
+    <div class="hours-item"><span class="hours-day">月曜日</span><span class="hours-time">—</span><span class="badge badge-closed">定休日</span></div>
+  </div>
+  <p class="hours-note">最新の営業時間はInstagram（@cafe_to_osake_sou）にてご確認ください。</p>
+</div>
+
+<div class="reserve-bg" id="reserve">
+  <div class="reserve-inner">
+    <span class="sec-label">Reservation</span>
+    <div class="sec-heading">ご予約</div>
+    <p class="reserve-note">お席に限りがあります。お気軽にご連絡ください。</p>
+    <div class="reserve-list">
+      <a href="tel:xxx-xxxx-xxxx" class="reserve-item">
+        <span class="r-icon">TEL</span>
+        <div><span class="r-label">電話でご予約</span><span class="r-val">xxx-xxxx-xxxx</span></div>
+        <span class="r-arrow">›</span>
+      </a>
+      <a href="https://www.instagram.com/cafe_to_osake_sou" class="reserve-item">
+        <span class="r-icon">Instagram</span>
+        <div><span class="r-label">InstagramでDM</span><span class="r-val">@cafe_to_osake_sou</span></div>
+        <span class="r-arrow">›</span>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="section" id="access">
+  <span class="sec-label">Access</span>
+  <div class="sec-heading">アクセス</div>
+  <div class="access-list">
+    <div class="access-row"><span class="access-key">住所</span><span class="access-val">大阪府守口市松月町（詳細は予約時にお知らせします）</span></div>
+    <div class="access-row"><span class="access-key">アクセス</span><span class="access-val">京阪守口市駅・大阪メトロ守口駅より徒歩約5分</span></div>
+    <div class="access-row"><span class="access-key">定休日</span><span class="access-val">月曜日</span></div>
+  </div>
+  <div class="map-area">Googleマップ埋め込み予定</div>
+</div>
+
+<footer>
+  <span class="footer-logo">カフェとお酒の店 創</span>
+  <div class="footer-copy">© 2026 カフェとお酒の店 創 — Moriguchi, Osaka</div>
+</footer>
+
+<script>
+function showTab(btn,id){
+  document.querySelectorAll('.menu-content').forEach(c=>c.classList.remove('active'));
+  document.querySelectorAll('.menu-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
