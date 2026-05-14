@@ -8,7 +8,7 @@
 <style>
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
-body{background:#f5f0e8;color:#1a1208;font-family:'Noto Serif JP',serif;font-weight:300;padding-bottom:80px}
+body{background:#f5f0e8;color:#1a1208;font-family:'Noto Serif JP',serif;font-weight:300;padding-bottom:0}
 
 .reserve-bar{position:fixed;bottom:0;left:0;right:0;z-index:9999;background:#1a1208;display:flex;gap:2px;padding:10px 12px;box-shadow:0 -4px 20px rgba(0,0,0,0.3)}
 .reserve-bar a{flex:1;padding:13px 4px;text-align:center;font-size:12px;font-weight:700;text-decoration:none;border-radius:4px;display:block;font-family:'Noto Sans JP',sans-serif}
@@ -78,18 +78,7 @@ nav{position:sticky;top:0;z-index:100;background:#1a1208;border-bottom:1px solid
 .badge-closed{background:#f5f5f5;color:#999}
 .hours-note{font-size:12px;color:#999;margin-top:12px;line-height:1.8;font-family:'Noto Sans JP',sans-serif}
 
-/* RESERVE */
-.reserve-bg{background:#5a3a20;padding:48px 24px}
-.reserve-inner{max-width:640px;margin:0 auto}
-.reserve-bg .sec-label{color:rgba(245,240,232,.4)}
-.reserve-bg .sec-heading{color:#f5f0e8}
-.reserve-note{font-size:13px;color:rgba(245,240,232,.7);line-height:2;margin-bottom:20px;font-family:'Noto Sans JP',sans-serif}
-.reserve-list{display:flex;flex-direction:column;gap:10px}
-.reserve-item{background:rgba(255,255,255,.1);padding:18px 20px;display:flex;align-items:center;gap:16px;text-decoration:none;color:#f5f0e8}
-.r-icon{font-size:11px;letter-spacing:1px;background:rgba(255,255,255,.15);padding:6px 10px;flex-shrink:0;font-weight:700;font-family:'Noto Sans JP',sans-serif}
-.r-label{font-size:11px;color:rgba(245,240,232,.5);display:block;margin-bottom:4px;font-family:'Noto Sans JP',sans-serif}
-.r-val{font-size:15px;font-weight:700}
-.r-arrow{margin-left:auto;font-size:20px;opacity:.5}
+
 
 .access-list{display:flex;flex-direction:column}
 .access-row{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid #e8dcc8}
@@ -105,18 +94,14 @@ footer{background:#1a1208;padding:28px 20px;text-align:center;border-top:1px sol
 </head>
 <body>
 
-<div class="reserve-bar">
-  <a href="tel:xxx-xxxx-xxxx" class="btn-tel">電話で予約</a>
-  <a href="#reserve" class="btn-line">LINEで予約</a>
-  <a href="#reserve" class="btn-web">席を予約</a>
-</div>
+
 
 <nav>
   <a href="#top" class="nav-logo">創</a>
   <ul class="nav-links">
     <li><a href="#menu">メニュー</a></li>
     <li><a href="#hours">営業時間</a></li>
-    <li><a href="#reserve">予約</a></li>
+    
     <li><a href="#access">アクセス</a></li>
   </ul>
 </nav>
@@ -133,7 +118,7 @@ footer{background:#1a1208;padding:28px 20px;text-align:center;border-top:1px sol
     <span class="hero-tag">守口市駅 徒歩5分</span>
   </div>
   <div class="hero-cta">
-    <a href="#reserve" class="cta-primary">今すぐ席を予約する</a>
+    <a href="#access" class="cta-primary">アクセスを見る</a>
     <a href="#menu" class="cta-secondary">メニューを見る</a>
   </div>
 </section>
@@ -216,24 +201,7 @@ footer{background:#1a1208;padding:28px 20px;text-align:center;border-top:1px sol
   <p class="hours-note">最新の営業時間はInstagram（@cafe_to_osake_sou）にてご確認ください。</p>
 </div>
 
-<div class="reserve-bg" id="reserve">
-  <div class="reserve-inner">
-    <span class="sec-label">Reservation</span>
-    <div class="sec-heading">ご予約</div>
-    <p class="reserve-note">お席に限りがあります。お気軽にご連絡ください。</p>
-    <div class="reserve-list">
-      <a href="tel:xxx-xxxx-xxxx" class="reserve-item">
-        <span class="r-icon">TEL</span>
-        <div><span class="r-label">電話でご予約</span><span class="r-val">xxx-xxxx-xxxx</span></div>
-        <span class="r-arrow">›</span>
-      </a>
-      <a href="https://www.instagram.com/cafe_to_osake_sou" class="reserve-item">
-        <span class="r-icon">Instagram</span>
-        <div><span class="r-label">InstagramでDM</span><span class="r-val">@cafe_to_osake_sou</span></div>
-        <span class="r-arrow">›</span>
-      </a>
-    </div>
-  </div>
+
 </div>
 
 <div class="section" id="access">
